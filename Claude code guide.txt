@@ -1,0 +1,79 @@
+================================================================
+                  CLAUDE CODE - COMPLETE GUIDE
+================================================================
+Download: https://claude.ai/download
+Docs:     https://docs.anthropic.com/claude-code
+GitHub:   https://github.com/anthropics/claude-code
+
+----------------------------------------------------------------
+WHERE TO RUN: PowerShell (No Admin required)
+----------------------------------------------------------------
+
+--- PREREQUISITES ---
+# Git Bash is required. Download from:
+https://git-scm.com/downloads/win
+
+# After installing Git Bash, set this environment variable:
+# Variable name:  CLAUDE_CODE_GIT_BASH_PATH
+# Variable value: C:\Program Files\Git\bin\bash.exe
+
+# How to set it:
+# Win + S > "Environment Variables" > User Variables > New
+
+
+--- INSTALL ---
+# Run in PowerShell (No Admin):
+winget install Anthropic.ClaudeCode
+
+# Or via the official script (PowerShell, No Admin):
+irm https://claude.ai/install.ps1 | iex
+
+
+--- VERIFY INSTALL ---
+claude --version
+
+
+--- LOGIN / AUTHENTICATE ---
+claude login
+
+
+--- START CLAUDE CODE ---
+# Navigate to your project folder first:
+cd C:\path\to\your\project
+claude
+
+
+--- UPDATE CLAUDE CODE ---
+winget upgrade Anthropic.ClaudeCode
+
+
+--- UNINSTALL ---
+# Step 1 - Uninstall via winget (PowerShell, No Admin):
+winget uninstall Anthropic.ClaudeCode
+
+# Step 2 - Remove leftover files (PowerShell, No Admin):
+Remove-Item -Recurse -Force "$env:USERPROFILE\.claude" -ErrorAction SilentlyContinue
+Remove-Item -Recurse -Force "$env:APPDATA\Claude" -ErrorAction SilentlyContinue
+Remove-Item -Recurse -Force "$env:LOCALAPPDATA\Claude" -ErrorAction SilentlyContinue
+Remove-Item -Recurse -Force "$env:LOCALAPPDATA\AnthropicClaude" -ErrorAction SilentlyContinue
+Remove-Item -Recurse -Force "$env:LOCALAPPDATA\Microsoft\WinGet\Packages\Anthropic.ClaudeCode*" -ErrorAction SilentlyContinue
+
+# Step 3 - Remove environment variable:
+# Win + S > "Environment Variables" > find CLAUDE_CODE_GIT_BASH_PATH > Delete
+
+# Step 4 - Verify removal:
+claude --version
+# Should say "not recognized"
+
+
+--- FIND INSTALL LOCATION ---
+where.exe claude
+
+
+--- USEFUL COMMANDS INSIDE CLAUDE CODE ---
+/help          - Show all commands
+/clear         - Clear conversation
+/exit          - Exit Claude Code
+/model         - Switch model
+
+================================================================
