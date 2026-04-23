@@ -1,0 +1,82 @@
+================================================================
+                     OLLAMA - COMPLETE GUIDE
+================================================================
+Download: https://ollama.com/download/windows
+Models:   https://ollama.com/library
+Docs:     https://github.com/ollama/ollama
+
+----------------------------------------------------------------
+WHERE TO RUN: PowerShell (No Admin required)
+----------------------------------------------------------------
+
+--- INSTALL ---
+# Download and run the installer from:
+https://ollama.com/download/OllamaSetup.exe
+
+# Or via winget (PowerShell, No Admin):
+winget install Ollama.Ollama
+
+
+--- VERIFY INSTALL ---
+ollama --version
+
+
+--- DOWNLOAD A MODEL ---
+ollama pull gemma3:1b
+ollama pull gemma4:e2b
+ollama pull phi3:mini
+ollama pull qwen2.5:0.5b
+
+
+--- RUN A MODEL ---
+ollama run gemma3:1b
+
+
+--- LIST INSTALLED MODELS ---
+ollama list
+
+
+--- UPDATE OLLAMA ---
+winget upgrade Ollama.Ollama
+
+
+--- UPDATE A MODEL (re-pull latest) ---
+ollama pull gemma3:1b
+
+
+--- DELETE A MODEL ---
+ollama rm gemma3:1b
+
+
+--- STOP OLLAMA SERVER ---
+# Close the Ollama tray icon, or:
+taskkill /IM ollama.exe /F
+
+
+--- UNINSTALL ---
+# Step 1 - Remove all models first:
+ollama list
+ollama rm <model-name>
+
+# Step 2 - Uninstall via winget (PowerShell, No Admin):
+winget uninstall Ollama.Ollama
+
+# Step 3 - Remove leftover files (PowerShell, No Admin):
+Remove-Item -Recurse -Force "$env:LOCALAPPDATA\Programs\Ollama" -ErrorAction SilentlyContinue
+Remove-Item -Recurse -Force "$env:USERPROFILE\.ollama" -ErrorAction SilentlyContinue
+Remove-Item -Recurse -Force "$env:APPDATA\Ollama" -ErrorAction SilentlyContinue
+Remove-Item -Recurse -Force "$env:LOCALAPPDATA\Ollama" -ErrorAction SilentlyContinue
+
+# Step 4 - Verify removal:
+ollama --version
+# Should say "not recognized"
+
+
+--- REDUCE RAM USAGE (if low memory) ---
+# Create a Modelfile with smaller context:
+echo FROM gemma3:1b > Modelfile
+echo PARAMETER num_ctx 512 >> Modelfile
+ollama create gemma3-lite -f Modelfile
+ollama run gemma3-lite
+
+================================================================
