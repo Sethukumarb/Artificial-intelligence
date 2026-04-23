@@ -1,0 +1,78 @@
+================================================================
+                      GIT - COMPLETE GUIDE
+================================================================
+Download: https://git-scm.com/downloads/win
+Docs:     https://git-scm.com/doc
+GitHub:   https://github.com/git-for-windows/git
+
+----------------------------------------------------------------
+WHERE TO RUN: PowerShell or CMD (No Admin required)
+           (Installer itself requires Admin)
+----------------------------------------------------------------
+
+--- INSTALL ---
+# Download installer from:
+https://git-scm.com/downloads/win
+
+# Or via winget (PowerShell, No Admin):
+winget install Git.Git
+
+# Run installer with default settings.
+# Make sure to check "Add Git to PATH" during setup.
+
+
+--- VERIFY INSTALL ---
+git --version
+
+
+--- CONFIGURE GIT (first time setup) ---
+git config --global user.name "Your Name"
+git config --global user.email "your@email.com"
+
+
+--- BASIC GIT COMMANDS ---
+git init                     # Start a new repo
+git clone <url>              # Clone a remote repo
+git status                   # Check current status
+git add .                    # Stage all changes
+git commit -m "message"      # Commit staged changes
+git push                     # Push to remote
+git pull                     # Pull latest from remote
+git log --oneline            # View commit history
+git branch                   # List branches
+git checkout -b new-branch   # Create and switch branch
+
+
+--- UPDATE GIT ---
+winget upgrade Git.Git
+
+
+--- UNINSTALL ---
+# Step 1 - Run Git uninstaller (PowerShell, No Admin):
+& "C:\Program Files\Git\unins000.exe"
+
+# Or uninstall via winget (PowerShell, No Admin):
+winget uninstall Git.Git
+
+# Or via Windows Settings:
+# Win + I > Apps > Installed Apps > Git > Uninstall
+
+# Step 2 - Remove leftover config files (PowerShell, No Admin):
+Remove-Item -Recurse -Force "$env:USERPROFILE\.gitconfig" -ErrorAction SilentlyContinue
+Remove-Item -Recurse -Force "$env:USERPROFILE\.git-credentials" -ErrorAction SilentlyContinue
+
+# Step 3 - Verify removal:
+git --version
+# Should say "not recognized"
+
+
+--- FIND INSTALL LOCATION ---
+where.exe git
+
+
+--- USEFUL LINKS ---
+Git Bash download:    https://git-scm.com/downloads/win
+GitHub Desktop:       https://desktop.github.com
+Git cheat sheet:      https://education.github.com/git-cheat-sheet-education.pdf
+
+================================================================
